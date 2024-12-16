@@ -63,9 +63,8 @@ jobs:
 
             if [ "$create_response" -ne 201 ]; then
               echo "¨Proyecto creado exitosamente (HTTP $create_response)."
-            else
-              echo "$create_response"
             fi
+              echo "$create_response"
 
             echo "Estableciendo la rama main como predeterminada..."
             curl -s -f -X POST -u "$SONAR_TOKEN:" \
