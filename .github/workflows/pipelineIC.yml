@@ -47,7 +47,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_CLOUD_TOKEN }}
           REPO_NAME: ${{ github.event.repository.name }}
-          SONAR_ORG: "devsecopsusach"
+          SONAR_ORG: "devsecopsusachtest"
         run: |
           echo "Verificando si el proyecto existe en SonarCloud..."
           project_exists=$(curl -s -o /dev/null -w "%{http_code}" -u "$SONAR_TOKEN:" \
@@ -67,3 +67,4 @@ jobs:
             -Dsonar.projectKey=${{ github.event.repository.name }} \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_CLOUD_TOKEN }}
+            -Dsonar.organization=${{ secrets.SONAR_ORG }}
