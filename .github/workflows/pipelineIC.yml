@@ -54,12 +54,18 @@ jobs:
 
           if [ "$response" -ne 200 ]; then
             echo "El proyecto no existe. Creándolo en SonarCloud..."
-            create_response=$(curl -s -w "%{http_code}" -o /dev/null -X POST -u "$SONAR_TOKEN:" \
+            create_response=$(curl -s -X POST -u "$SONAR_TOKEN:" \
               "https://sonarcloud.io/api/projects/create" \
               -d "name=$REPO_NAME" \
               -d "project=$REPO_NAME" \
               -d "organization=devsecopsusachtest" \
               -d "visibility=public")
+            #create_response=$(curl -s -w "%{http_code}" -o /dev/null -X POST -u "$SONAR_TOKEN:" \
+            #  "https://sonarcloud.io/api/projects/create" \
+            #  -d "name=$REPO_NAME" \
+            #  -d "project=$REPO_NAME" \
+            #  -d "organization=devsecopsusachtest" \
+            #  -d "visibility=public")
 
             if [ "$create_response" -ne 201 ]; then
               echo "¨Proyecto creado exitosamente (HTTP $create_response)."
