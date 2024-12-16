@@ -63,6 +63,8 @@ jobs:
 
             if [ "$create_response" -ne 201 ]; then
               echo "¨Proyecto creado exitosamente (HTTP $create_response)."
+            else
+              echo "$create_response"
             fi
 
             echo "Estableciendo la rama main como predeterminada..."
