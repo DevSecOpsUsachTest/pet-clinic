@@ -49,6 +49,7 @@ jobs:
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
           echo "Verificando si el proyecto $REPO_NAME existe en SonarCloud..."
+          echo "$REPO_NAME"
           response=$(curl -s -o /dev/null -w "%{http_code}" -u "$SONAR_TOKEN:" \
             "https://sonarcloud.io/api/projects/search?projects=$REPO_NAME")
 
