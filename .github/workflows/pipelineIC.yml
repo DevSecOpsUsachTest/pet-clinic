@@ -55,7 +55,7 @@ jobs:
           set +e
 
           # Intentar crear el proyecto en SonarCloud
-          curl -f -X POST -u "${{ secrets.SONAR_TOKEN }}:" \
+          curl -f -X POST -u "5137fd40dda6c8c3c019b8975becb693b165d7ab" \
             "https://sonarcloud.io/api/projects/create" \
             -d "name=${{ github.event.repository.name }}" \
             -d "project=${{ github.event.repository.name }}" \
