@@ -48,6 +48,9 @@ jobs:
           fi
       - name: Validando existencia de proyecto en SonarCloud
         id: validateProjectOnSonar
+        env: 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          REPO_NAME: ${{ github.event.repository.name }}
         run: |
           set +e
 
@@ -60,7 +63,7 @@ jobs:
             -d "visibility=public"
 
           # Verificar si el proyecto ya existe
-          echo "$? Hola mundo"
+          echo "$REPO_NAME"
           if [ $? -ne 0 ]; then
             echo "Proyecto ya existe en SonarCloud"
             echo "project_created=false" >> $GITHUB_ENV
