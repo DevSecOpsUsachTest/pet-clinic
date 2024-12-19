@@ -60,6 +60,7 @@ jobs:
             -d "visibility=public"
 
           # Verificar si el proyecto ya existe
+          echo "$?"
           if [ $? -ne 0 ]; then
             echo "Proyecto ya existe en SonarCloud"
             echo "project_created=false" >> $GITHUB_ENV
