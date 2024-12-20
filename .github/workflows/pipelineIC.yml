@@ -29,8 +29,6 @@ jobs:
 
       #Valida y configura archivo build.gradle
       - name: Validate and Configure build.gradle
-        env: 
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           if [ -f "build.gradle" ]; then
             echo "Encontró el archivo"
@@ -50,13 +48,10 @@ jobs:
       # Validamos si existe un proyecto en SonarCloud con el nombre  
       - name: Validando existencia de proyecto en SonarCloud
         id: validateProjectOnSonar
-#        env: 
-#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           set +e
 
           # Intentar crear el proyecto en SonarCloud
-          # curl -X POST -u '${{ secrets.SONAR_TOKEN }}:' \
           curl -X POST -u "$SONAR_TOKEN:" \
           "https://sonarcloud.io/api/projects/create" \
           -d "name = $REPO_NAME" \
