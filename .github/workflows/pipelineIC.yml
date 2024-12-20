@@ -50,15 +50,17 @@ jobs:
         id: validateProjectOnSonar
         run: |
           set +e
+
           # Intentar crear el proyecto en SonarCloud
           curl -X POST -u '${{ secrets.SONAR_TOKEN }}:' \
-          "https://sonarcloud.io/api/projects/create" \
-          -d "name=$REPO_NAME" \
-          -d "project=$REPO_NAME" \
-          -d "organization=devsecopsusachtest" \
-          -d "visibility=public"
+            "https://sonarcloud.io/api/projects/create" \
+            -d "name=$REPO_NAME" \
+            -d "project=$REPO_NAME" \
+            -d "organization=devsecopsusachtest" \
+            -d "visibility=public"
 
-          #echo "CODIGO RESPUESTA: $?"
+          # Imprimir el código de respuesta
+          echo "CODIGO RESPUESTA: $?"
 
           # Verificar si el proyecto ya existe
           if [ $? -ne 0 ]; then
@@ -75,7 +77,8 @@ jobs:
 
             echo "project_created=true" >> $GITHUB_ENV
           fi  
-            echo "CODIGO $?"
+
+          # Volver a habilitar el comportamiento de detenerse en errores
           set -e
 #         exit 1
 
