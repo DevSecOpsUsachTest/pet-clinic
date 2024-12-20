@@ -55,7 +55,7 @@ jobs:
           set +e
 
           # Intentar crear el proyecto en SonarCloud
-          curl -X POST -u "c0184fbcb657f38be1d3a5355c5fbb89ba1c2d04:" \
+          curl -X POST -u '${{ secrets.SONAR_TOKEN }}:' \
           "https://sonarcloud.io/api/projects/create" \
           -d "name=MiProyecto" \
           -d "project=mi-proyecto" \
@@ -64,8 +64,6 @@ jobs:
 
 
           # Verificar si el proyecto ya existe
-          echo "${{ secrets.SONAR_TOKEN }}"
-          echo $SONAR_TOKEN
           if [ $? -ne 0 ]; then
             echo "Proyecto ya existe en SonarCloud"
             echo "project_created=false" >> $GITHUB_ENV
