@@ -59,12 +59,11 @@ jobs:
             -d "organization=devsecopsusachtest" \
             -d "visibility=public"
 
-          # Imprimir el código de respuesta
-          echo "CODIGO RESPUESTA: $?"
-
+          echo  "CODIGO ES: $?"
+          
           # Verificar si el proyecto ya existe
           if [ $? -ne 0 ]; then
-            echo "Proyecto ya existe en SonarCloud"
+            echo "CODIGO $? PUEDE SER ERROR"
             echo "project_created=false" >> $GITHUB_ENV
           else
             echo "Proyecto ${{ github.event.repository.name }} creado exitosamente en SonarCloud"
