@@ -49,7 +49,7 @@ jobs:
       - name: Validando existencia de proyecto en SonarCloud
         id: validateProjectOnSonar
         run: |
-          set +e
+          
 
           # Intentar crear el proyecto en SonarCloud
           curl -X POST -u '${{ secrets.SONAR_TOKEN }}:' \
@@ -61,8 +61,7 @@ jobs:
 
           echo  "CODIGO ES: $?"
 
-          # Volver a habilitar el comportamiento de detenerse en errores
-          set -e
+          
           
           # Verificar si el proyecto ya existe
           if [ $? -ne 0 ]; then
