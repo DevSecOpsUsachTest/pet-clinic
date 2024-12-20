@@ -31,7 +31,7 @@ jobs:
       - name: Validate and Configure build.gradle
         env: 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: | 
+        run: |
           if [ -f "build.gradle" ]; then
             echo "Encontró el archivo"
             echo "Verificando configuracion del plugin sonar"
@@ -53,11 +53,11 @@ jobs:
 #        env: 
 #          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          #set +e
+          set +e
 
           # Intentar crear el proyecto en SonarCloud
           # curl -X POST -u '${{ secrets.SONAR_TOKEN }}:' \
-          curl -X POST -u '$SONAR_TOKEN:' \
+          curl -X POST -u "$SONAR_TOKEN:" \
           "https://sonarcloud.io/api/projects/create" \
           -d "name = $REPO_NAME" \
           -d "project = $REPO_NAME" \
@@ -80,8 +80,8 @@ jobs:
 
             echo "project_created=true" >> $GITHUB_ENV
           fi
-          #set -e
-
+          set -e
+          exit 1
       - name: Enable execution gradlew
         run: | 
           chmod 777 gradlew
