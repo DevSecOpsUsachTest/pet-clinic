@@ -75,11 +75,8 @@ jobs:
 
             echo "project_created=true" >> $GITHUB_ENV
           fi  
-
-          if [ $? -ne 0 ]; then
             echo "CODIGO $?"
-          fi
-#          set -e
+          set -e
 #         exit 1
 
 #      - name: Enable execution gradlew
