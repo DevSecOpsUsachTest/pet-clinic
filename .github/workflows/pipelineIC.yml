@@ -55,10 +55,10 @@ jobs:
           set +e
 
           # Intentar crear el proyecto en SonarCloud
-          #curl -X POST -u "c0184fbcb657f38be1d3a5355c5fbb89ba1c2d04:" \
+          curl -X POST -u "c0184fbcb657f38be1d3a5355c5fbb89ba1c2d04:" \
           "https://sonarcloud.io/api/projects/create" \
-          -d "name=$REPO_NAME" \
-          -d "project=$REPO_NAME" \
+          -d "name=MiProyecto" \
+          -d "project=mi-proyecto" \
           -d "organization=devsecopsusachtest" \
           -d "visibility=public"
 
