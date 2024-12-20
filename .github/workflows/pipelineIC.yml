@@ -49,8 +49,7 @@ jobs:
       - name: Validando existencia de proyecto en SonarCloud
         id: validateProjectOnSonar
         run: |
-          set +e
-
+          
           # Intentar crear el proyecto en SonarCloud
           curl -X POST -u '${{ secrets.SONAR_TOKEN }}:' \
           "https://sonarcloud.io/api/projects/create" \
@@ -62,13 +61,12 @@ jobs:
           #echo "CODIGO RESPUESTA: $?"
 
           # Verificar si el proyecto ya existe
-
           if [ $? -ne 0 ]; then
             echo "Proyecto ya existe en SonarCloud"
             echo "project_created=false" >> $GITHUB_ENV
-          elif [ $? -eq 0 ]; then
+          else
             echo "Proyecto ${{ github.event.repository.name }} creado exitosamente en SonarCloud"
-            echo "project_created=true" >> $GITHUB_ENV
+
             # Establecer la rama main como rama por defecto
             curl -X POST -u "${{ secrets.SONAR_TOKEN }}:" \
               "https://sonarcloud.io/api/project_branches/rename" \
@@ -76,10 +74,12 @@ jobs:
               -d "project=${{ github.event.repository.name }}"
 
             echo "project_created=true" >> $GITHUB_ENV
-          else
+          fi  
+
+          if [ $? -ne 0 ]; then
             echo "CODIGO $?"
           fi
-          set -e
+#          set -e
 #         exit 1
 
 #      - name: Enable execution gradlew
