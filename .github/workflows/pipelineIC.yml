@@ -60,19 +60,21 @@ jobs:
             -d "visibility=public"
 
           echo  "CODIGO ES: $?"
-          
+
           # Verificar si el proyecto ya existe
           if [ $? -ne 0 ]; then
-            echo "CODIGO $? PUEDE SER ERROR"
+          
             echo "project_created=false" >> $GITHUB_ENV
-          else
-            echo "Proyecto ${{ github.event.repository.name }} creado exitosamente en SonarCloud"
+
+          else # SI LA RESPUESTA ES 0 O LO CREO O YA EXISTE
+
+            echo "Proyecto ${{ github.event.repository.name }} / $REPO_NAME creado exitosamente en SonarCloud"
 
             # Establecer la rama main como rama por defecto
             curl -X POST -u "${{ secrets.SONAR_TOKEN }}:" \
               "https://sonarcloud.io/api/project_branches/rename" \
               -d "name=main" \
-              -d "project=${{ github.event.repository.name }}"
+              -d "project=$REPO_NAME"
 
             echo "project_created=true" >> $GITHUB_ENV
           fi  
