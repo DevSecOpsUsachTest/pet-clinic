@@ -31,7 +31,7 @@ jobs:
       - name: Validate and Configure build.gradle
         env: 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
+        run: | 
           if [ -f "build.gradle" ]; then
             echo "Encontró el archivo"
             echo "Verificando configuracion del plugin sonar"
